@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Servicios", href: "#servicios" },
-  { label: "Proceso", href: "#proceso" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Servicios", id: "servicios" },
+  { label: "Proceso", id: "proceso" },
+  { label: "Portfolio", id: "portfolio" },
+  { label: "Nosotros", id: "nosotros" },
+  { label: "Contacto", id: "contacto" },
 ];
 
 const Header = () => {
@@ -45,14 +45,19 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
+              <button
+                key={link.id}
+                onClick={() => {
+                  const element = document.getElementById(link.id);
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
                 className="text-muted-foreground hover:text-foreground transition-colors relative group"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-              </a>
+              </button>
             ))}
           </nav>
 
@@ -77,14 +82,19 @@ const Header = () => {
           <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border">
             <nav className="flex flex-col p-6 space-y-4">
               {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                <button
+                  key={link.id}
+                  onClick={() => {
+                    const element = document.getElementById(link.id);
+                    if (element) {
+                      element.scrollIntoView({ behavior: "smooth" });
+                      setIsMobileMenuOpen(false);
+                    }
+                  }}
                   className="text-lg text-muted-foreground hover:text-foreground transition-colors py-2"
                 >
                   {link.label}
-                </a>
+                </button>
               ))}
               <Button variant="gradient" className="mt-4">
                 Hablemos
